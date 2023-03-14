@@ -1,6 +1,6 @@
 <div id="container"><!-- flex container -->
     <div class="box"><!-- flex item -->
-        <p>Click on the languages on the right to read about them!</p>
+        <p style="font-size: 200%">Click on the languages at the top to read about them!</p>
     </div>
 </div>
 

@@ -36,7 +36,7 @@
 </header>
 
 <div style="margin-left: 10px; margin-right: 10px">
-    <zero-md id="markdown-display" class="side" src="landing.md"></zero-md>
+    <zero-md id="markdown-display" class="hide" class="side"></zero-md>
 </div>
 
 </html>
@@ -44,8 +44,7 @@
 <script>
     const markdown_display = document.getElementById("markdown-display");
 
-    window.location.hash = "";
-    window.onhashchange = async function () {
+    async function updatePage() {
         if (window.location.hash === "") { // invalid
             return;
         }
@@ -54,11 +53,7 @@
         markdown_display.classList.add("hide");
 
         // change displayed markdown file
-        if (window.location.hash === "#home") { // we are returning to the homepage
-            markdown_display.setAttribute('src', 'landing.md')
-        } else { // else navigate to language file
-            markdown_display.setAttribute('src', `pages/${window.location.hash.slice(1)}.md`)
-        }
+        markdown_display.setAttribute('src', `pages/${window.location.hash.slice(1)}.md`)
 
         // TODO This could be done better
         // render markdown display back in
@@ -67,4 +62,14 @@
             markdown_display.classList.remove("hide");
         }, 420);
     }
+
+    // on start
+    if (window.location.hash === "") { // no hash means go home!
+        window.location.hash = "#home";
+    }
+    updatePage();
+
+    // call this function too when the page updates
+    window.onhashchange = function() { updatePage() };
+
 </script>
