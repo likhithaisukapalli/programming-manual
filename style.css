@@ -1,3 +1,88 @@
+/*
+ * setup
+ */
+
+:root {
+    --color-primary: white;
+    --color-primary-text: black;
+    --color-secondary: #dddddd;
+    --color-secondary-text: black;
+}
+
+html {
+    overflow-y: auto;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: var(--color-primary-text);
+    text-decoration: none;
+}
+
+/*
+ * navigation header
+ */
+
+header {
+    height: fit-content;
+    border-bottom: 1px solid var(--color-secondary);
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+}
+
+header > * {
+    padding-left: 10px;
+}
+
+/*
+ * horizontal list group
+ */
+
+.horizontal-list-group {
+    display: flex;
+}
+
+.horizontal-list-group-item {
+    display: block;
+    border: 1px solid var(--color-secondary);
+    border-right: none;
+    padding: 3px 10px 3px 10px;
+}
+
+.horizontal-list-group-item:hover {
+    background-color: var(--color-secondary);
+}
+
+.horizontal-list-group-item:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.horizontal-list-group-item:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-right: 1px solid var(--color-secondary);
+}
+
+a.horizontal-list-group-item * {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/*
+ * transition
+ */
+
 .hide {
     opacity: 0 !important;
 }
@@ -5,46 +90,4 @@
 * {
     opacity: 1;
     transition: opacity 0.4s;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 0.35fr;
-    grid-gap: 20px;
-}
-
-.list-group-item:first-child {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: 1em;
-    margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-}
-
-a.list-group-item {
-    color: black;
-    text-decoration: none;
-}
-
-a.list-group-item * {
-    display: block;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-.list-group-item:last-child {
-    margin-bottom: 0;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-html {
-    overflow-y: scroll;
 }

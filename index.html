@@ -1,51 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <!-- https://stackoverflow.com/questions/37770620/how-to-include-markdown-md-files-inside-html-files -->
 <!-- Lightweight client-side loader that feature-detects and load polyfills only when necessary -->
+<!-- TODO ensure license requirements met -->
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
 
 <!-- Load the element definition -->
+<!-- TODO ensure license requirements met -->
 <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
 
-<title>WIP</title>
-
-<div id="bigcontainer" class="grid-container hide">
-    <div class="grid-child">
-        <zero-md id="leftmd" class="side" src="./landing.md"></zero-md>
-    </div>
-
-    <div class="grid-child">
-        <!-- <zero-md id="rightmd" class="side" src="pages/example1.md"></zero-md> -->
-
-        <!-- This list could be dynamiclly generated, but for now it is not -->
-        <div class="list-group">
-            <a href="#example1" class="list-group-item">
-                <b class="list-group-item-heading">Java</b>
-                <p class="list-group-item-text">coffee</p>
-            </a>
-            <a href="#example2" class="list-group-item">
-                <b class="list-group-item-heading">Python</b>
-                <p class="list-group-item-text">snek language</p>
-            </a>
-            <a href="#example3" class="list-group-item">
-                <b class="list-group-item-heading">placeholder</b>
-                <p class="list-group-item-text">loreum ipsum</p>
-            </a>
-        </div>
-    </div>
-</div>
-
+<title>Programming Manual</title>
 <link rel="stylesheet" href="./style.css">
 
+<header>
+    <h1><a href="#home">Programming Manual</a></h1>
+
+    <!-- TODO This list should be dynamically populated -->
+    <!-- TODO This should eventually become a dropdown menu instead -->
+    <div class="horizontal-list-group">
+        <a href="#example1" class="horizontal-list-group-item">
+            <b>Java</b>
+            <p>coffee</p>
+        </a>
+        <a href="#example2" class="horizontal-list-group-item">
+            <b>Python</b>
+            <p>snek language</p>
+        </a>
+        <a href="#example3" class="horizontal-list-group-item">
+            <b>placeholder</b>
+            <p>loreum ipsum</p>
+        </a>
+    </div>
+
+</header>
+
+<div style="margin-left: 10px; margin-right: 10px">
+    <zero-md id="markdown-display" class="side" src="landing.md"></zero-md>
+</div>
+
+</html>
+
 <script>
+    const markdown_display = document.getElementById("markdown-display");
+
     window.location.hash = "";
-    const panel = document.getElementById("leftmd");
     window.onhashchange = async function () {
-        if(window.location.hash === "" || window.location.hash === "#"){
+        if (window.location.hash === "") { // invalid
             return;
         }
-        panel.setAttribute('src', `pages/${window.location.hash.slice(1)}.md`)
-        panel.classList.add("hide");
-        // This could be done better
-        setTimeout(async()=>{await panel.render(); panel.classList.remove("hide")},420);
+
+        // hide markdown display
+        markdown_display.classList.add("hide");
+
+        // change displayed markdown file
+        if (window.location.hash === "#home") { // we are returning to the homepage
+            markdown_display.setAttribute('src', 'landing.md')
+        } else { // else navigate to language file
+            markdown_display.setAttribute('src', `pages/${window.location.hash.slice(1)}.md`)
+        }
+
+        // TODO This could be done better
+        // render markdown display back in
+        setTimeout(async() => {
+            await markdown_display.render();
+            markdown_display.classList.remove("hide");
+        }, 420);
     }
-    setTimeout(async()=>{document.getElementById("bigcontainer").classList.remove("hide");},500);
 </script>
