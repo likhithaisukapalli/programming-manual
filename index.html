@@ -1,0 +1,51 @@
+<!-- https://stackoverflow.com/questions/37770620/how-to-include-markdown-md-files-inside-html-files -->
+<!-- Lightweight client-side loader that feature-detects and load polyfills only when necessary -->
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
+
+<!-- Load the element definition -->
+<script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+
+<title>WIP</title>
+
+<div id="bigcontainer" class="grid-container hide">
+    <div class="grid-child">
+        <zero-md id="leftmd" class="side" src="./landing.md"></zero-md>
+    </div>
+
+    <div class="grid-child">
+        <!-- <zero-md id="rightmd" class="side" src="pages/example1.md"></zero-md> -->
+
+        <!-- This list could be dynamiclly generated, but for now it is not -->
+        <div class="list-group">
+            <a href="#example1" class="list-group-item">
+                <b class="list-group-item-heading">Java</b>
+                <p class="list-group-item-text">coffee</p>
+            </a>
+            <a href="#example2" class="list-group-item">
+                <b class="list-group-item-heading">Python</b>
+                <p class="list-group-item-text">snek language</p>
+            </a>
+            <a href="#example3" class="list-group-item">
+                <b class="list-group-item-heading">placeholder</b>
+                <p class="list-group-item-text">loreum ipsum</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="./style.css">
+
+<script>
+    window.location.hash = "";
+    const panel = document.getElementById("leftmd");
+    window.onhashchange = async function () {
+        if(window.location.hash === "" || window.location.hash === "#"){
+            return;
+        }
+        panel.setAttribute('src', `pages/${window.location.hash.slice(1)}.md`)
+        panel.classList.add("hide");
+        // This could be done better
+        setTimeout(async()=>{await panel.render(); panel.classList.remove("hide")},420);
+    }
+    setTimeout(async()=>{document.getElementById("bigcontainer").classList.remove("hide");},500);
+</script>
